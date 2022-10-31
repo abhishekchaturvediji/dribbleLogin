@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
-const Models = require('../models/index')
+const { RavRegisteredUser , UserTweets } = require('../models/index')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -27,10 +27,39 @@ router.post('/homepage', function(req, res) {
   res.render('home', {email : req.body.email , password : req.body.password})
 });
 
-
-
 router.get('/three', function(req, res) {
   res.render('three')
+});
+
+router.get('/tweet', function(req, res) {
+  UserTweets.findAll()
+    .then(data => {
+      // console.log(":: data :; ", data);
+      res.render('tweet', {AllTweet : data})
+    })
+    .catch(err =>{
+      console.log("err :: ", err);
+    })
+});
+
+// let tweets = [];
+router.post('/add-tweet', function(req, res) {
+
+  console.log("req.body :: ", req.body);
+
+  UserTweets.create({
+    tweets : req.body.tweet
+  })
+  .then(data =>{
+    // console.log(": data created :");
+    // console.log(":: data :: ", data);
+    res.redirect('tweet')
+  })
+  .catch(err =>{
+    console.log(": data err :");
+    console.log(":: err :: ", err);
+  })
+
 });
 
 module.exports = router;
