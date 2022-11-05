@@ -32,6 +32,7 @@ router.get('/three', function(req, res) {
 });
 
 router.get('/tweet', function(req, res) {
+  
   UserTweets.findAll()
     .then(data => {
       // console.log(":: data :; ", data);
@@ -40,10 +41,11 @@ router.get('/tweet', function(req, res) {
     .catch(err =>{
       console.log("err :: ", err);
     })
+
 });
 
 // let tweets = [];
-router.post('/add-tweet', function(req, res) {
+router.post('/add-tweet',function(req, res) {
 
   console.log("req.body :: ", req.body);
 
@@ -51,14 +53,32 @@ router.post('/add-tweet', function(req, res) {
     tweets : req.body.tweet
   })
   .then(data =>{
-    // console.log(": data created :");
-    // console.log(":: data :: ", data);
+    console.log(": data created :");
+    console.log(":: data ::", data);
     res.redirect('tweet')
   })
   .catch(err =>{
     console.log(": data err :");
     console.log(":: err :: ", err);
   })
+
+});
+
+
+router.get('/delete-tweet', function(req, res) {
+  
+  let primartId = req.query.id; 
+  UserTweets.destroy({
+    where: {
+     id : primartId
+    }
+  })
+    .then(data => {
+      res.redirect('/tweet')
+    })
+    .catch(err =>{
+      console.log("err :: ", err);
+    })
 
 });
 
