@@ -18,9 +18,12 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+
       college_name: {
         type: Sequelize.STRING
       },
+      token : Sequelize.STRING,
+      display_name : Sequelize.STRING,
       password: {
         type: Sequelize.STRING
       },

@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     mobile: DataTypes.INTEGER,
     email: DataTypes.STRING,
     college_name: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    token : DataTypes.STRING,
+    display_name : DataTypes.STRING
   }, {
     sequelize,
     tableName : 'rav_registered_user',

@@ -3,6 +3,8 @@ var router = express.Router();
 const axios = require('axios');
 const { RavRegisteredUser , UserTweets } = require('../models/index')
 
+const {createTweet} = require("../controller/userController")
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -31,20 +33,9 @@ router.get('/three', function(req, res) {
   res.render('three')
 });
 
-router.get('/tweet', function(req, res) {
-  
-  UserTweets.findAll()
-    .then(data => {
-      // console.log(":: data :; ", data);
-      res.render('tweet', {AllTweet : data})
-    })
-    .catch(err =>{
-      console.log("err :: ", err);
-    })
+router.get('/tweet',createTweet);
 
-});
-
-// let tweets = [];
+// let tweets = []; 
 router.post('/add-tweet',function(req, res) {
 
   console.log("req.body :: ", req.body);
@@ -64,7 +55,6 @@ router.post('/add-tweet',function(req, res) {
 
 });
 
-
 router.get('/delete-tweet', function(req, res) {
   
   let primartId = req.query.id; 
@@ -81,6 +71,25 @@ router.get('/delete-tweet', function(req, res) {
     })
 
 });
+
+// register
+router.get('/register', function(req, res){
+  res.render('register',{Message : ''})
+});
+
+router.post('/register-user', function(req, res){
+  if(req.body.name === ''){
+    return res.render('register',{Message : 'The name must not be empty'})
+  }
+  if(req.body.mobile_no === ''){
+    return res.render('register',{Message : 'The Mobile no must not be empty'})
+  }
+  if(typeof req.body.mobile_no != 'number' ){
+    return res.render('register',{Message : 'The Mobile no must a number'})
+  }
+
+});
+
 
 module.exports = router;
   

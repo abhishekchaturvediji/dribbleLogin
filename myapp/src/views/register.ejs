@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+
+</head>
+<body>
+    <div class="container"> 
+        <nav>
+            <div class="left">
+                Razor
+            </div>
+        </nav>
+        <% if(Message){ %>
+            <div style="background-color: rgb(241, 177, 177); width: 50%; text-align: center; margin-left: 350px;" >
+                <%= Message %> <!-- this is going to output xyz -->
+                <!-- <script>
+                    var getTemp = <%= Message  %>;
+                    window.alert(getTemp);
+                </script> -->
+            </div>
+       <% } %>
+        
+        <main>
+           <section>
+                <h3>Agent Register</h3>
+                <p>Hey, enter your details to get sign up to your account</p>
+                <!-- login from starts here -->
+                <form method="post" action="/register-user" >
+                    <input type="text" name="name" id="" placeholder="Name">
+                    <input type="text" name="email" placeholder="Enter email">
+                    <input type="password" name="password" id="" placeholder="Password">
+                    <input type="password" name="confirm_password" id="" placeholder="Confirm Password">
+                    <input type="number" name="mobile_no" id="" placeholder="Mobile no">
+                    <button type="submit" >Sign Up</button>
+                </form>
+                <!-- login from ends here -->
+                <div class="elseSign" >
+                    <div class="hr"></div>
+                    <div class="signIn">or sign in with</div>
+                    <div class="hr"></div>
+                </div>
+                <div class="socialParent">
+                    <button class="socialLoginBtn" >Google</button>
+                    <button class="socialLoginBtn" >Apple</button>
+                    <button class="socialLoginBtn" >Facebook</button>
+                </div>
+                <div  class="registerSection">
+                    Already have an account? <span>Login Now</span>
+                </div>
+           </section>
+        </main>
+    </div>
+
+
+    <script>
+
+    </script>
+
+</body>
+</html>
