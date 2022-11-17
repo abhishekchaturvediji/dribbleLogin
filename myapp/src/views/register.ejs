@@ -21,27 +21,18 @@
                 Razor
             </div>
         </nav>
-        <% if(Message){ %>
-            <div style="background-color: rgb(241, 177, 177); width: 50%; text-align: center; margin-left: 350px;" >
-                <%= Message %> <!-- this is going to output xyz -->
-                <!-- <script>
-                    var getTemp = <%= Message  %>;
-                    window.alert(getTemp);
-                </script> -->
-            </div>
-       <% } %>
-        
+       
         <main>
            <section>
                 <h3>Agent Register</h3>
                 <p>Hey, enter your details to get sign up to your account</p>
                 <!-- login from starts here -->
                 <form method="post" action="/register-user" >
-                    <input type="text" name="name" id="" placeholder="Name">
+                    <input type="text" name="name" placeholder="Name">
                     <input type="text" name="email" placeholder="Enter email">
-                    <input type="password" name="password" id="" placeholder="Password">
-                    <input type="password" name="confirm_password" id="" placeholder="Confirm Password">
-                    <input type="number" name="mobile_no" id="" placeholder="Mobile no">
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="confirm_password" placeholder="Confirm Password">
+                    <input type="number" name="mobile_no" placeholder="Mobile no">
                     <button type="submit" >Sign Up</button>
                 </form>
                 <!-- login from ends here -->
