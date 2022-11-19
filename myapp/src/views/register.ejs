@@ -21,19 +21,24 @@
                 Razor
             </div>
         </nav>
-       
+
         <main>
            <section>
-                <h3>Agent Register</h3>
+                <h3>User Register</h3>
                 <p>Hey, enter your details to get sign up to your account</p>
                 <!-- login from starts here -->
                 <form method="post" action="/register-user" >
-                    <input type="text" name="name" placeholder="Name">
-                    <input type="text" name="email" placeholder="Enter email">
-                    <input type="password" name="password" placeholder="Password">
-                    <input type="password" name="confirm_password" placeholder="Confirm Password">
-                    <input type="number" name="mobile_no" placeholder="Mobile no">
+                    <input type="text" value="<%= formValue ? formValue.name : '' %>" name="name" placeholder="Name">
+                    <input type="text" value="<%= formValue ? formValue.email : '' %>" name="email" placeholder="Enter email">
+                    <input type="password" value="<%= formValue ? formValue.password : '' %>" name="password" placeholder="Password">
+                    <input type="password" value="<%= formValue ? formValue.confirm_password : '' %>" name="confirm_password" placeholder="Confirm Password">
+                    <input type="number" value="<%= formValue ? formValue.mobile_no : '' %>" name="mobile_no" placeholder="Mobile no">
                     <button type="submit" >Sign Up</button>
+                    <% if(error){ %>
+                        <div id ="error" >
+                          *<%= error %>
+                        </div>  
+                    <% } %>            
                 </form>
                 <!-- login from ends here -->
                 <div class="elseSign" >

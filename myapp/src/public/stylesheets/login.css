@@ -178,3 +178,12 @@ main section .signIn {
 .registerSection > span{
   font-weight: bold;
 }
+
+
+#error{
+  color: red;
+  text-align: center;
+  padding: 7px;
+  font-size: 12px;
+  font-weight: 600;
+}

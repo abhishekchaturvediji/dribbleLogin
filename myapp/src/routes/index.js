@@ -3,7 +3,7 @@ var router = express.Router();
 const axios = require('axios');
 // const { RavRegisteredUser , UserTweets } = require('../models/index')
 
-const {userRegister} = require("../controller/userController")
+const { userRegister } = require("../controller/userController")
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,7 +18,11 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/register', function(req, res, next) {
-  res.render('register');
+
+  const formValue =  req.flash('formValue');
+  let error = req.flash('error');
+
+  res.render('register',{error, formValue});
 });
 
 

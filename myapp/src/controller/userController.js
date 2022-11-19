@@ -23,11 +23,14 @@ module.exports = {
         const { error, value } = schema.validate(reqParam);
 
         if(error){
-            console.log(" error :: ", error.details[0].message);
+            console.log(":: error ::", error.details[0].message);
+            req.flash('formValue',req.body)
+            req.flash('error',error.details[0].message);
+            return res.redirect(req.get('Referrer'))
         }
 
         
-
+        
     },
 
 }
