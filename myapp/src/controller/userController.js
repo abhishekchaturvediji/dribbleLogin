@@ -1,14 +1,20 @@
 const Joi = require('joi');
+const jwt = require('jsonwebtoken')
 
+const { User } = require("../models")
 
-// validation
+const bcrypt = require('bcrypt');
+
+// validatoion
 // checks
-// third process
+// function
 // response
 
 module.exports = {
 
     userRegister : async(req,res) =>{
+
+        console.log(" userRegister :: called ", );
 
         const reqParam = req.body;
 
@@ -29,8 +35,52 @@ module.exports = {
             return res.redirect(req.get('Referrer'))
         }
 
+        console.log(":: User :: ", User);
+
+        // already exists email 
+
+        let userObj = {
+            name : reqParam.name,
+            email : reqParam.email,
+            password : await bcrypt.hash(reqParam.password, 4),
+            mobile_no : reqParam.mobile_no,
+        }
+
+        let userDetails = await User.create(userObj).catch(err => console.log(" err ", err))
+        
+        if(!userDetails){
+            return res.status(500).send({message : 'Something went wrong'})
+        }
         
         
+        let payload = {
+            id : userDetails.id,
+            email : userDetails.email
+        }
+
+        let token = await module.exports.issueTokenToUser(payload);
+
+        userDetails.token = token;
+        await userDetails.save()
+
+        // await User.update({token : token},{
+        //     where : {
+        //         id : userDetails.id
+        //     }
+        // })
+       
+        return res.status(200).send({ data : userDetails, message : 'User registered successfully'})
+
     },
+
+    // retrieve token for newly signed user
+    issueTokenToUser : async(payload)=>{
+
+        return jwt.sign({
+            id : payload.id,
+            email : payload.email
+        },'shhhhh',{ algorithm: 'RS256'})
+
+    }
 
 }

@@ -23,6 +23,7 @@ router.get('/register', function(req, res, next) {
   let error = req.flash('error');
 
   res.render('register',{error, formValue});
+
 });
 
 
