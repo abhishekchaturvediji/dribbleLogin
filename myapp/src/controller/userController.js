@@ -14,10 +14,7 @@ module.exports = {
 
     userRegister : async(req,res) =>{
 
-        console.log(" userRegister :: called ", );
-
         const reqParam = req.body;
-
         const schema = Joi.object({
             name: Joi.string().min(1).max(30).required().label('Name'),
             email: Joi.string().email().required().label('Email'),
@@ -36,8 +33,19 @@ module.exports = {
         }
 
         console.log(":: User :: ", User);
-
         // already exists email 
+
+        let emailAlreadyExist = await User.findOne({
+            where : {
+                email : reqParam.email
+            }
+        })
+
+
+        if(emailAlreadyExist){
+            req.flash('error','The email already exist');
+            return res.redirect(req.get('Referrer'))
+        }
 
         let userObj = {
             name : reqParam.name,
@@ -52,7 +60,6 @@ module.exports = {
             return res.status(500).send({message : 'Something went wrong'})
         }
         
-        
         let payload = {
             id : userDetails.id,
             email : userDetails.email
@@ -62,6 +69,8 @@ module.exports = {
 
         userDetails.token = token;
         await userDetails.save()
+
+        console.log(":: hello hi ::", token);
 
         // await User.update({token : token},{
         //     where : {
@@ -75,12 +84,12 @@ module.exports = {
 
     // retrieve token for newly signed user
     issueTokenToUser : async(payload)=>{
-
         return jwt.sign({
             id : payload.id,
             email : payload.email
-        },'shhhhh',{ algorithm: 'RS256'})
-
+          }, 'private-key');
+       
     }
+
 
 }

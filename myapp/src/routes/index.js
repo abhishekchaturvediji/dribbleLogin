@@ -26,7 +26,6 @@ router.get('/register', function(req, res, next) {
 
 });
 
-
 router.post('/register-user',userRegister);
 
 
