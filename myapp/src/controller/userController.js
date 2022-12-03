@@ -89,6 +89,46 @@ module.exports = {
             email : payload.email
           }, 'private-key');
        
+    },
+
+    userLogin : async(req,res) =>{
+
+        const reqParam = req.body;
+        const schema = Joi.object({
+            email: Joi.string().email().required().label('Email'),
+            password: Joi.string().required().label('Password'),
+        })
+
+        const { error, value } = schema.validate(reqParam);
+
+        if(error){
+            console.log(":: error ::", error.details[0].message);
+            req.flash('formValue',req.body)
+            req.flash('error',error.details[0].message);
+            return res.redirect(req.get('Referrer'))
+        }
+
+        // email check 
+        let curEmailInfo = await User.findOne({where : {email : reqParam.email}})
+
+        if(!curEmailInfo){
+            req.flash('formValue',req.body)
+            req.flash('error','Oops User does not exist, please register');
+            return res.redirect(req.get('Referrer'))
+        }
+
+
+        const match = await bcrypt.compare(reqParam.password, curEmailInfo.password);
+
+        console.log(" match :: " , match);
+
+        //login
+        if(match) {
+            // localStorage.setItem('userData',curEmailInfo)
+            return res.redirect(req.get('Referrer'))
+        }
+     
+        
     }
 
 

@@ -29,9 +29,16 @@
                 <h3>User Login</h3>
                 <p>Hey, enter your details to get sign in to your account</p>
                 <!-- login from starts here -->
-                <form method="post" action="/homepage" >
+                <form method="post" action="/login-user" >
                     <input type="text" name="email" placeholder="Enter email">
                     <input type="password" name="password" id="" placeholder="Passcode">
+
+                    <% if(error){ %>
+                        <div id ="error" >
+                          *<%= error %>
+                        </div>  
+                    <% } %>            
+
                     <span>Having trouble in sign in?</span>
                     <button type="submit" >Sign in</button>
                 </form>
@@ -47,7 +54,7 @@
                     <button class="socialLoginBtn" >Facebook</button>
                 </div>
                 <div  class="registerSection">
-                    Don't have an account? <span>Request Now</span>
+                    Don't have an account? <span> <a href="/register">Request Now</a> </span>
                 </div>
            </section>
         </main>
