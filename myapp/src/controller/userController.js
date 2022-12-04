@@ -120,14 +120,17 @@ module.exports = {
 
         const match = await bcrypt.compare(reqParam.password, curEmailInfo.password);
 
-        console.log(" match :: " , match);
+        console.log("match :: " , match);
 
         //login
-        if(match) {
-            // localStorage.setItem('userData',curEmailInfo)
+        if(!match) {
+            req.flash('formValue',req.body)
+            req.flash('error','Entered password does not match');
             return res.redirect(req.get('Referrer'))
         }
-     
+
+        res.cookie('UserData',curEmailInfo);
+        res.redirect('/tweet')
         
     }
 

@@ -34,5 +34,17 @@ router.post('/register-user',userRegister);
 
 router.post('/login-user', userLogin );
 
+router.get('/tweet', function(req, res, next) {
+
+  const formValue =  req.flash('formValue');
+  let error = req.flash('error');
+
+  console.log(": res.cookie : ",req.cookies['UserData']);
+
+  res.render('tweet',{error, formValue});
+
+});
+
+
 
 module.exports = router;

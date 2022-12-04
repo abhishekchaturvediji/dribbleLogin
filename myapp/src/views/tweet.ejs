@@ -14,20 +14,7 @@
 
     <h2>All tweets</h2>
 
-    <% if(AllTweet && AllTweet.length > 0){ %>
-        <% AllTweet.forEach((data,index) => { %>
-            <h3>
-                <div style="display: flex; align-items :center;justify-content:space-between;" >
-                    <span>
-                        <%= index + 1 %> . <%= data.tweets  %>
-                    </span>
-                    <a style="margin-left:300px ;" href="/delete-tweet?id=<%= data.id %>">delete tweet</a>
-                </div>
-            </h3>
-        <% }) %>
-    <% }else{ %>
-        <h5>No tweets</h5>
-    <% } %>
+    
     
 </body>
 </html>
